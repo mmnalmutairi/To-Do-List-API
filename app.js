@@ -18,23 +18,22 @@ app.post("/tasks", (req, res) => {
         done: false,
     }
     data.push(task);
-    res.status(201).json({"message": `Data with ID ${task.id} has been successfully added.`});
+    res.status(201).json(task);
 })
 
 app.put("/tasks/:taskId", (req, res) => {
-    const {taskId} = req.params;
+    const { taskId } = req.params;
     const foundTask = data.find(task => task.id === +taskId)
-    
-    for(const key in req.body) foundTask[key] = req.body[key];
-    
+
+    // for (const key in req.body) foundTask[key] = req.body[key];
+    Object.assign(foundTask, req.body);
     res.json(data);
 
 })
 
 app.delete("/tasks/:taskId", (req, res) => {
-    const {taskId} = req.params;
+    const { taskId } = req.params;
     data = data.filter(task => task.id !== +taskId);
-    
     res.json(data);
 })
 

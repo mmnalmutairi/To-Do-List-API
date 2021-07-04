@@ -25,8 +25,8 @@ app.put("/tasks/:taskId", (req, res) => {
     const { taskId } = req.params;
     const foundTask = data.find(task => task.id === +taskId)
 
-    // for (const key in req.body) foundTask[key] = req.body[key];
-    Object.assign(foundTask, req.body);
+    for (const key in req.body) foundTask[key] = req.body[key];
+    // Object.assign(foundTask, req.body);
     res.json(data);
 
 })
